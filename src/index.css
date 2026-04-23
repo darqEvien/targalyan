@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Bebas Neue", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Cormorant Garamond", ui-serif, Georgia, serif;
+  --font-sans: "DM Mono", ui-monospace, monospace;
+  --font-mono: "DM Mono", ui-monospace, monospace;
+  --color-burak-bg: #080807;
+  --color-burak-bg2: #0e0e0c;
+  --color-burak-surface: #1a1a17;
+  --color-burak-line: rgb(255 255 255 / 0.07);
+  --color-burak-line2: rgb(255 255 255 / 0.12);
+  --color-burak-text: #f0ede6;
+  --color-burak-muted: #7a7870;
+  --color-burak-accent: #c8a96e;
+  --color-burak-accent2: #8b6e3f;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply min-h-dvh bg-[#080807] font-sans text-[#f0ede6] font-light antialiased;
+  }
+  body.cursor-site {
+    cursor: none;
+  }
+  @media (max-width: 768px) {
+    body.cursor-site {
+      cursor: auto;
+    }
+  }
+}
+
+/* Film grain — matches reference site feel */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 38;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.028;
+}
