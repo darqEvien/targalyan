@@ -23,14 +23,6 @@
   body {
     @apply min-h-dvh bg-[#080807] font-sans text-[#f0ede6] font-light antialiased;
   }
-  body.cursor-site {
-    cursor: none;
-  }
-  @media (max-width: 768px) {
-    body.cursor-site {
-      cursor: auto;
-    }
-  }
 }
 
 /* Film grain — matches reference site feel */

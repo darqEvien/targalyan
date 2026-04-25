@@ -86,7 +86,6 @@ export function AboutSection() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.05, duration: 0.45 }}
-              data-cursor="hover"
               className="flex items-center justify-between border-b border-[rgb(255_255_255/0.07)] py-[18px] text-[13px] text-[#7a7870] transition-colors hover:text-[#f0ede6]"
             >
               <span>{label}</span>

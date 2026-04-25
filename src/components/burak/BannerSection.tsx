@@ -1,14 +1,33 @@
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { BannerParticleCanvas } from './hero/BannerParticleCanvas'
 
 export function BannerSection() {
   const ref = useRef<HTMLElement>(null)
+  const pointerRef = useRef({ nx: 0.5, ny: 0.5 })
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'end start'],
   })
   const textY = useTransform(scrollYProgress, [0, 1], [40, -40])
+
+  useEffect(() => {
+    const onMove = (e: PointerEvent) => {
+      const el = ref.current
+      if (!el) return
+      const r = el.getBoundingClientRect()
+      if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) {
+        return
+      }
+      pointerRef.current = {
+        nx: (e.clientX - r.left) / Math.max(1, r.width),
+        ny: (e.clientY - r.top) / Math.max(1, r.height),
+      }
+    }
+    window.addEventListener('pointermove', onMove, { passive: true })
+    return () => window.removeEventListener('pointermove', onMove)
+  }, [])
 
   return (
     <section
@@ -16,12 +35,12 @@ export function BannerSection() {
       id="banner"
       className="relative flex min-h-[50vh] items-center justify-center overflow-hidden py-24 sm:min-h-[60vh]"
     >
-      <BannerParticleCanvas />
+      <BannerParticleCanvas containerRef={ref} pointerRef={pointerRef} />
       <motion.div
         style={{ y: textY }}
-        className="pointer-events-none absolute inset-0 z-[1] flex items-center justify-center"
+        className="pointer-events-none absolute inset-0 z-[1] flex items-center justify-center px-4"
       >
-        <p className="whitespace-nowrap text-center font-display text-[clamp(40px,8vw,120px)] tracking-[0.06em] text-[rgb(240_237_230/0.06)]">
+        <p className="max-w-[100vw] text-center font-display text-[clamp(32px,7vw,120px)] leading-none tracking-[0.06em] text-[rgb(240_237_230/0.07)] sm:whitespace-nowrap">
           STRUCTURE IS FORM
         </p>
       </motion.div>

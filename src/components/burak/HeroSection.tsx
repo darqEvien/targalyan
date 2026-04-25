@@ -46,7 +46,6 @@ export function HeroSection() {
           </p>
           <a
             href="#projects"
-            data-cursor="hover"
             className="inline-flex items-center gap-4 border border-[#8b6e3f] px-7 py-3.5 font-mono text-[11px] uppercase tracking-[0.2em] text-[#c8a96e] no-underline transition-colors duration-300 hover:bg-[rgb(200_169_110/0.12)]"
           >
             View projects
@@ -62,12 +61,8 @@ export function HeroSection() {
       </div>
 
       <div className="pointer-events-none absolute bottom-8 right-6 z-[2] flex flex-col items-center gap-2 opacity-0 animate-[fadeIn_1s_1.2s_forwards] sm:right-12">
-        <span
-          className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#7a7870]"
-          style={{ writingMode: 'vertical-rl' }}
-        >
-          Scroll
-        </span>
+   
+     
         <div
           className="h-[60px] w-px bg-gradient-to-b from-[#c8a96e] to-transparent"
           style={{ animation: 'scrollPulse 2s 1.5s infinite' }}

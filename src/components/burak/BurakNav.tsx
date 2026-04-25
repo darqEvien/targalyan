@@ -21,7 +21,6 @@ export function BurakNav() {
     >
       <a
         href="#"
-        data-cursor="hover"
         className="font-display text-[22px] tracking-[0.12em] text-[#f0ede6] no-underline"
       >
         B<span className="text-[#c8a96e]">.</span>TARGAL
@@ -35,7 +34,6 @@ export function BurakNav() {
           <a
             key={l.href}
             href={l.href}
-            data-cursor="hover"
             className="group relative hidden font-mono text-[11px] uppercase tracking-[0.2em] text-[#7a7870] transition-colors hover:text-[#f0ede6] sm:block"
           >
             {l.label}
@@ -44,7 +42,6 @@ export function BurakNav() {
         ))}
         <Link
           to="/admin"
-          data-cursor="hover"
           className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#c8a96e] no-underline sm:ml-2"
         >
           Admin ↗

@@ -68,7 +68,6 @@ export function ContactSection() {
               id={f.id}
               type={f.type}
               placeholder={f.ph}
-              data-cursor="hover"
               className="w-full border-0 border-b border-[rgb(255_255_255/0.12)] bg-transparent py-2.5 font-mono text-[13px] font-light text-[#f0ede6] outline-none transition-colors focus:border-[#c8a96e]"
             />
           </div>
@@ -79,8 +78,7 @@ export function ContactSection() {
           </label>
           <select
             id="ptype"
-            data-cursor="hover"
-            className="w-full cursor-none appearance-none border-0 border-b border-[rgb(255_255_255/0.12)] bg-transparent py-2.5 font-mono text-[13px] font-light text-[#f0ede6] outline-none focus:border-[#c8a96e] sm:cursor-auto"
+            className="w-full cursor-pointer appearance-none border-0 border-b border-[rgb(255_255_255/0.12)] bg-transparent py-2.5 font-mono text-[13px] font-light text-[#f0ede6] outline-none focus:border-[#c8a96e]"
           >
             <option value="">Select type…</option>
             <option>Bridge / infrastructure</option>
@@ -98,13 +96,11 @@ export function ContactSection() {
             id="brief"
             rows={4}
             placeholder="Describe your project…"
-            data-cursor="hover"
             className="h-[100px] w-full resize-none border-0 border-b border-[rgb(255_255_255/0.12)] bg-transparent py-2.5 font-mono text-[13px] font-light text-[#f0ede6] outline-none focus:border-[#c8a96e]"
           />
         </div>
         <button
           type="submit"
-          data-cursor="hover"
           className="mt-2 w-fit border border-[#8b6e3f] bg-transparent px-9 py-4 font-mono text-[11px] uppercase tracking-[0.25em] text-[#c8a96e] transition-colors hover:bg-[rgb(200_169_110/0.12)]"
         >
           Send brief →

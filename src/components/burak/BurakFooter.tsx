@@ -9,7 +9,6 @@ export function BurakFooter() {
           <a
             key={l}
             href="#"
-            data-cursor="hover"
             className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#7a7870] no-underline transition-colors hover:text-[#c8a96e]"
           >
             {l}

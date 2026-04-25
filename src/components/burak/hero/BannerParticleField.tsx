@@ -1,14 +1,14 @@
-import { useEffect, useMemo, useRef } from 'react'
+import { useMemo, useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 
-const COLS = 38
-const ROWS = 22
+const COLS = 40
+const ROWS = 24
 
-export function BannerParticleField() {
+type PointerRef = React.MutableRefObject<{ nx: number; ny: number }>
+
+export function BannerParticleField({ pointerRef }: { pointerRef: PointerRef }) {
   const points = useRef<THREE.Points>(null)
-  const base = useRef<Float32Array>(new Float32Array(COLS * ROWS * 3))
-  const pointer = useRef({ x: 0, y: 0 })
 
   const geometry = useMemo(() => {
     const pos = new Float32Array(COLS * ROWS * 3)
@@ -22,28 +22,20 @@ export function BannerParticleField() {
         pos[i++] = 0
       }
     }
-    base.current = new Float32Array(pos)
     const g = new THREE.BufferGeometry()
-    g.setAttribute('position', new THREE.BufferAttribute(pos, 3))
+    g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(pos), 3))
+    g.userData.base = new Float32Array(pos)
     return g
-  }, [])
-
-  useEffect(() => {
-    const onMove = (e: PointerEvent) => {
-      const nx = (e.clientX / window.innerWidth - 0.5) * 10.5
-      const ny = -((e.clientY / window.innerHeight) - 0.5) * 5.8
-      pointer.current = { x: nx, y: ny }
-    }
-    window.addEventListener('pointermove', onMove, { passive: true })
-    return () => window.removeEventListener('pointermove', onMove)
   }, [])
 
   useFrame((state) => {
     const attr = geometry.getAttribute('position') as THREE.BufferAttribute
     const arr = attr.array as Float32Array
-    const b = base.current
-    const s = state.clock.elapsedTime * 0.55
-    const { x: mx, y: my } = pointer.current
+    const b = geometry.userData.base as Float32Array
+    const s = state.clock.elapsedTime * 0.52
+    const { nx, ny } = pointerRef.current
+    const mx = (nx - 0.5) * 10.5
+    const my = -((ny - 0.5) * 5.8)
     let k = 0
     for (let i = 0; i < COLS * ROWS; i++) {
       const bx = b[k]
@@ -51,15 +43,15 @@ export function BannerParticleField() {
       const dx = bx - mx
       const dy = by - my
       const dist = Math.sqrt(dx * dx + dy * dy) + 0.001
-      const push = Math.max(0, 1.55 - dist) * 0.72
+      const push = Math.max(0, 1.55 - dist) * 0.68
       const ang = Math.atan2(dy, dx)
-      arr[k] = bx + Math.cos(ang) * push + Math.sin(s + i * 0.22) * 0.045
-      arr[k + 1] = by + Math.sin(ang) * push + Math.cos(s * 0.82 + i * 0.16) * 0.04
+      arr[k] = bx + Math.cos(ang) * push + Math.sin(s + i * 0.2) * 0.042
+      arr[k + 1] = by + Math.sin(ang) * push + Math.cos(s * 0.8 + i * 0.15) * 0.038
       k += 3
     }
     attr.needsUpdate = true
     if (points.current) {
-      points.current.rotation.z = Math.sin(state.clock.elapsedTime * 0.08) * 0.02
+      points.current.rotation.z = Math.sin(state.clock.elapsedTime * 0.075) * 0.018
     }
   })
 
@@ -67,9 +59,9 @@ export function BannerParticleField() {
     <points ref={points} geometry={geometry}>
       <pointsMaterial
         color="#c8a96e"
-        size={0.042}
+        size={0.038}
         transparent
-        opacity={0.52}
+        opacity={0.48}
         depthWrite={false}
         sizeAttenuation
       />

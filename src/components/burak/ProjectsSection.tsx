@@ -90,8 +90,7 @@ export function ProjectsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-20px' }}
             transition={{ delay: Math.min(i, 4) * 0.04, duration: 0.5 }}
-            data-cursor="hover"
-            className="group relative grid cursor-none grid-cols-[48px_1fr] items-center gap-4 overflow-hidden border-b border-[rgb(255_255_255/0.07)] py-8 sm:grid-cols-[80px_1fr_240px_120px] sm:gap-8 sm:py-8"
+            className="group relative grid grid-cols-[48px_1fr] items-center gap-4 overflow-hidden border-b border-[rgb(255_255_255/0.07)] py-8 sm:grid-cols-[80px_1fr_240px_120px] sm:gap-8 sm:py-8"
             onPointerEnter={() => setHovered(p)}
             onPointerLeave={() => setHovered(null)}
           >
